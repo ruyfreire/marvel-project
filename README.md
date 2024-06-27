@@ -8,6 +8,9 @@ Projeto em React iniciado com Vite, que consome a API da Marvel
 
 ## Rodar projeto local
 
+- Criar uma cópia do arquivo `.env.test`, com o nome de `.env.local`, e adicionar as suas keys da api marvel conforme documentação
+- [Marvel API Docs](https://developer.marvel.com/documentation/authorization)
+
 ```sh
 # Instalar dependências
 npm run install
