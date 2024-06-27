@@ -1,25 +1,27 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { Home } from '@/pages/Home'
-import { Mapa } from '@/pages/Mapa'
-import { App } from '@/App'
-import { Detalhes } from '@/pages/Detalhes'
+
+import { App } from '@/app'
+import { Details } from '@/pages/details'
+import { Home } from '@/pages/home'
+import { NotFound } from '@/pages/not-found'
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <NotFound />,
     children: [
       {
         path: '/',
         element: <Home />,
       },
       {
-        path: '/mapa',
-        element: <Mapa />,
+        path: '/detalhes/:id',
+        element: <Details />,
       },
       {
-        path: '/detalhes/:id',
-        element: <Detalhes />,
+        path: '*',
+        element: <NotFound />,
       },
     ],
   },

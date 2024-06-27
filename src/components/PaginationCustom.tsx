@@ -7,17 +7,22 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination'
-import { useState } from 'react'
 
 type PaginationCustomProps = {
-  count: number
-  onChange?: (page: number) => void
+  current: number
+  total: number
+  totalPerPage?: number
+  onPageChange?: (page: number) => void
 }
 
-export function PaginationCustom({ count }: PaginationCustomProps) {
-  const [current, setCurrent] = useState(1)
-
-  const lastPage = count >= 20 ? Math.floor(count / 20) + 1 : 1
+export function PaginationCustom({
+  current,
+  total,
+  totalPerPage = 20,
+  onPageChange,
+}: PaginationCustomProps) {
+  const lastPage =
+    total >= totalPerPage ? Math.floor(total / totalPerPage) + 1 : 1
 
   return (
     <Pagination>
@@ -30,13 +35,13 @@ export function PaginationCustom({ count }: PaginationCustomProps) {
               current <= 1 ? 'pointer-events-none opacity-50' : undefined
             }
             href="#"
-            onClick={() => current > 1 && setCurrent((prev) => prev - 1)}
+            onClick={() => current > 1 && onPageChange?.(current - 1)}
           />
         </PaginationItem>
 
         {current !== 1 && (
           <PaginationItem>
-            <PaginationLink href="#" onClick={() => setCurrent(1)}>
+            <PaginationLink href="#" onClick={() => onPageChange?.(1)}>
               1
             </PaginationLink>
           </PaginationItem>
@@ -62,7 +67,7 @@ export function PaginationCustom({ count }: PaginationCustomProps) {
 
         {current !== lastPage && (
           <PaginationItem>
-            <PaginationLink href="#" onClick={() => setCurrent(lastPage)}>
+            <PaginationLink href="#" onClick={() => onPageChange?.(lastPage)}>
               {lastPage}
             </PaginationLink>
           </PaginationItem>
@@ -76,7 +81,7 @@ export function PaginationCustom({ count }: PaginationCustomProps) {
             className={
               current >= lastPage ? 'pointer-events-none opacity-50' : undefined
             }
-            onClick={() => current < lastPage && setCurrent((prev) => prev + 1)}
+            onClick={() => current < lastPage && onPageChange?.(current + 1)}
           />
         </PaginationItem>
       </PaginationContent>
