@@ -7,7 +7,7 @@
     "dev": "vite",
     "dev:test": "vite --mode test",
     "build": "tsc -b && vite build",
-    "test": "vitest",
+    "test": "vitest run",
     "cy:run": "cypress run",
     "test:e2e": "start-server-and-test dev:test http://localhost:5173 cy:run",
     "cy:open": "cypress open --e2e --browser chrome",

@@ -131,7 +131,7 @@ export function Home() {
           />
 
           <InputForm
-            placeholder="Name (Parcial)"
+            placeholder="Nome parcial"
             {...register('partialName')}
             errorMessage={errors.partialName?.message}
           />
