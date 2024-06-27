@@ -29,19 +29,19 @@ export function PaginationCustom({
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            aria-disabled={current <= 1}
-            tabIndex={current <= 1 ? -1 : undefined}
-            className={
-              current <= 1 ? 'pointer-events-none opacity-50' : undefined
-            }
-            href="#"
+            data-testid="pagination-previous"
+            disabled={current <= 1}
+            className="disabled:opacity-50"
             onClick={() => current > 1 && onPageChange?.(current - 1)}
           />
         </PaginationItem>
 
         {current !== 1 && (
           <PaginationItem>
-            <PaginationLink href="#" onClick={() => onPageChange?.(1)}>
+            <PaginationLink
+              data-testid="first-page"
+              onClick={() => onPageChange?.(1)}
+            >
               1
             </PaginationLink>
           </PaginationItem>
@@ -49,25 +49,28 @@ export function PaginationCustom({
 
         {current > 2 && (
           <PaginationItem>
-            <PaginationEllipsis />
+            <PaginationEllipsis data-testid="left-ellipsis" />
           </PaginationItem>
         )}
 
         <PaginationItem>
-          <PaginationLink href="#" isActive>
+          <PaginationLink data-testid="current-page" isActive>
             {current}
           </PaginationLink>
         </PaginationItem>
 
         {lastPage - current > 1 && (
           <PaginationItem>
-            <PaginationEllipsis />
+            <PaginationEllipsis data-testid="right-ellipsis" />
           </PaginationItem>
         )}
 
         {current !== lastPage && (
           <PaginationItem>
-            <PaginationLink href="#" onClick={() => onPageChange?.(lastPage)}>
+            <PaginationLink
+              data-testid="last-page"
+              onClick={() => onPageChange?.(lastPage)}
+            >
               {lastPage}
             </PaginationLink>
           </PaginationItem>
@@ -75,12 +78,9 @@ export function PaginationCustom({
 
         <PaginationItem>
           <PaginationNext
-            href="#"
-            aria-disabled={current >= lastPage}
-            tabIndex={current >= lastPage ? -1 : undefined}
-            className={
-              current >= lastPage ? 'pointer-events-none opacity-50' : undefined
-            }
+            data-testid="pagination-next"
+            disabled={current >= lastPage}
+            className="disabled:opacity-50"
             onClick={() => current < lastPage && onPageChange?.(current + 1)}
           />
         </PaginationItem>
