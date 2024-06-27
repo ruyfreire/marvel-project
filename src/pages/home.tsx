@@ -189,6 +189,8 @@ export function Home() {
 
             return (
               <Link
+                data-hero-name={character.name}
+                data-testid={`hero-card-${character.id}`}
                 to={`/detalhes/${character.id}`}
                 key={character.id}
                 className="min-h-[21rem] transition-transform hover:scale-95 hover:opacity-90"
@@ -203,7 +205,9 @@ export function Home() {
                   </CardContent>
 
                   <CardFooter className="p-0">
-                    <h4 className="text-xl font-bold">{character.name}</h4>
+                    <h4 className="text-xl font-bold" data-testid="hero-name">
+                      {character.name}
+                    </h4>
                   </CardFooter>
                 </Card>
               </Link>

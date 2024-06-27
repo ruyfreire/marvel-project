@@ -12,7 +12,12 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["vitest/globals", "@testing-library/jest-dom"]
+    "types": ["vitest/globals", "@testing-library/jest-dom", "cypress", "node"]
   },
-  "include": ["vite.config.ts"]
+  "ts-node": {
+    "compilerOptions": {
+      "module": "ES2015"
+    }
+  },
+  "include": ["vite.config.ts", "cypress/**/*.ts"]
 }

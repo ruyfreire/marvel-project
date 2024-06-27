@@ -5,11 +5,13 @@ const api = axios.create({
 })
 
 api.interceptors.request.use((config) => {
-  config.params = {
-    ...config.params,
-    ts: '1',
-    apikey: import.meta.env.VITE_MARVEL_API_KEY,
-    hash: import.meta.env.VITE_MARVEL_HASH,
+  if (import.meta.env.DEV) {
+    config.params = {
+      ...config.params,
+      ts: '1',
+      apikey: import.meta.env.VITE_MARVEL_API_KEY,
+      hash: import.meta.env.VITE_MARVEL_HASH,
+    }
   }
 
   return config

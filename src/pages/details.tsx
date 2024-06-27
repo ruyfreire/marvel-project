@@ -14,7 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 type TabNames = 'comics' | 'series' | 'stories' | 'events' | null
 
-const TOTAL_PER_PAGE = 10
+const TOTAL_PER_PAGE = 20
 
 export function Details() {
   const { id } = useParams()
@@ -126,7 +126,9 @@ export function Details() {
             alt={character.name}
           />
 
-          <h2 className="mb-4 text-2xl font-bold">{character.name}</h2>
+          <h2 className="mb-4 text-2xl font-bold" data-testid="hero-name">
+            {character.name}
+          </h2>
         </div>
 
         <Separator
@@ -138,7 +140,9 @@ export function Details() {
           <h3 className="mb-4 text-2xl font-bold underline">Bio</h3>
 
           {character.description && (
-            <p className="mb-4">{character.description}</p>
+            <p className="mb-4" data-testid="hero-description">
+              {character.description}
+            </p>
           )}
 
           <Tabs
@@ -151,10 +155,18 @@ export function Details() {
               ref={tabListRef}
               className="grid h-[2.5rem] w-full grid-cols-4"
             >
-              <TabsTrigger value="comics">Comics</TabsTrigger>
-              <TabsTrigger value="series">Series</TabsTrigger>
-              <TabsTrigger value="stories">Stories</TabsTrigger>
-              <TabsTrigger value="events">Events</TabsTrigger>
+              <TabsTrigger data-testid="tab-comics" value="comics">
+                Comics
+              </TabsTrigger>
+              <TabsTrigger data-testid="tab-series" value="series">
+                Series
+              </TabsTrigger>
+              <TabsTrigger data-testid="tab-stories" value="stories">
+                Stories
+              </TabsTrigger>
+              <TabsTrigger data-testid="tab-events" value="events">
+                Events
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="comics" className="m-0 h-full">

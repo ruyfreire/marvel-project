@@ -40,7 +40,10 @@ export function ScrollTabContent({ data, totalPerPage }: TabContentProps) {
 
   if (data.results.length === 0) {
     return (
-      <div className="flex items-center justify-center py-8">
+      <div
+        className="flex items-center justify-center py-8"
+        data-testid="no-card-tab"
+      >
         Nada foi encontrado!
       </div>
     )
@@ -66,7 +69,11 @@ export function ScrollTabContent({ data, totalPerPage }: TabContentProps) {
           }
 
           return (
-            <Card key={item.id} className="mt-2 flex gap-4 p-4">
+            <Card
+              key={item.id}
+              className="mt-2 flex gap-4 p-4"
+              data-testid={`card-tab-${item.id}`}
+            >
               {pathImage && (
                 <HoverCard openDelay={200} closeDelay={200}>
                   <HoverCardTrigger>

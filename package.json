@@ -5,8 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:test": "vite --mode test",
     "build": "tsc -b && vite build",
     "test": "vitest",
+    "cy:run": "cypress run",
+    "test:e2e": "start-server-and-test dev:test http://localhost:5173 cy:run",
+    "cy:open": "cypress open --e2e --browser chrome",
+    "test:e2e:open": "start-server-and-test dev:test http://localhost:5173 cy:open",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "prettier": "prettier --write src/**/*.{ts,tsx,js,jsx}",
     "preview": "vite preview"
@@ -49,18 +54,26 @@
     "@typescript-eslint/parser": "^7.13.1",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
+    "cypress": "^13.12.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "eslint-plugin-simple-import-sort": "^12.1.0",
     "jsdom": "^24.1.0",
+    "msw": "^2.3.1",
     "postcss": "^8.4.38",
     "prettier": "3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.5",
+    "start-server-and-test": "^2.0.4",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.2.2",
     "vite": "^5.3.1",
     "vitest": "^1.6.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

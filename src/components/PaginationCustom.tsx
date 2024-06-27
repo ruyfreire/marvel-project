@@ -21,8 +21,7 @@ export function PaginationCustom({
   totalPerPage = 20,
   onPageChange,
 }: PaginationCustomProps) {
-  const lastPage =
-    total >= totalPerPage ? Math.floor(total / totalPerPage) + 1 : 1
+  const lastPage = total >= totalPerPage ? Math.ceil(total / totalPerPage) : 1
 
   return (
     <Pagination className="py-2">
