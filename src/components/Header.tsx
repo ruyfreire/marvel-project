@@ -13,15 +13,20 @@ export function Header() {
     <div className="z-10 w-full">
       <div className="relative flex items-center p-2">
         {pathname !== '/' && (
-          <Link to="/" className="absolute flex items-center gap-2">
-            <Button variant="outline" size="icon" onClick={() => navigate(-1)}>
-              <CornerUpLeft />
-            </Button>
-          </Link>
+          <Button
+            className="absolute"
+            variant="outline"
+            size="icon"
+            onClick={() => navigate(-1)}
+          >
+            <CornerUpLeft />
+          </Button>
         )}
 
         <div className="flex flex-1 justify-center">
-          <img src="/logo.svg" alt="" />
+          <Link to="/">
+            <img src="/logo.svg" alt="" />
+          </Link>
         </div>
       </div>
 

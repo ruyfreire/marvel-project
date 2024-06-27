@@ -25,7 +25,7 @@ export function PaginationCustom({
     total >= totalPerPage ? Math.floor(total / totalPerPage) + 1 : 1
 
   return (
-    <Pagination>
+    <Pagination className="py-2">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious

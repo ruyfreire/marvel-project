@@ -50,7 +50,7 @@ export function ScrollTabContent({ data, totalPerPage }: TabContentProps) {
 
   return (
     <>
-      <ScrollArea className="h-[60vh]">
+      <ScrollArea className="h-full">
         {results.map((item) => {
           let pathImage = ''
           if (item.thumbnail?.path) {
@@ -66,7 +66,7 @@ export function ScrollTabContent({ data, totalPerPage }: TabContentProps) {
           }
 
           return (
-            <Card key={item.id} className="mt-4 flex gap-4 p-4">
+            <Card key={item.id} className="mt-2 flex gap-4 p-4">
               {pathImage && (
                 <HoverCard openDelay={200} closeDelay={200}>
                   <HoverCardTrigger>

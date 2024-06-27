@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { HeartCrack } from 'lucide-react'
+import { useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
@@ -19,6 +20,8 @@ export function Details() {
   const { id } = useParams()
 
   const [searchParams, setSearchParams] = useSearchParams()
+  const containerRef = useRef<HTMLDivElement>(null)
+  const tabListRef = useRef<HTMLDivElement>(null)
 
   const currentTab = (searchParams.get('tab') as TabNames) ?? 'comics'
   const page = searchParams.get('page')
@@ -99,11 +102,23 @@ export function Details() {
 
   const pathImage = `${character.thumbnail.path}.${character.thumbnail.extension}`
 
+  const bottomContainer =
+    containerRef.current?.getBoundingClientRect().bottom ?? 0
+  const bottomTabList = tabListRef.current?.getBoundingClientRect().bottom ?? 0
+
+  const maxHeightInPixel = bottomContainer - bottomTabList
+
+  const maxHeightScroll =
+    maxHeightInPixel > 300 ? `${maxHeightInPixel / 16}rem` : '50vh'
+
   return (
     <>
       <Helmet title={`${character.name} - ${currentTab}`} />
 
-      <div className="grid h-full grid-cols-1 gap-4 md:grid-cols-[1fr,1px,1fr]">
+      <div
+        ref={containerRef}
+        className="grid h-full grid-cols-1 gap-4 md:grid-cols-[1fr,1px,1fr]"
+      >
         <div className="flex flex-col gap-4">
           <img
             className="max-h-[calc(70vh)] w-full self-center rounded-md object-cover"
@@ -122,38 +137,48 @@ export function Details() {
         <div>
           <h3 className="mb-4 text-2xl font-bold underline">Bio</h3>
 
-          <p className="mb-4">{character.description}</p>
+          {character.description && (
+            <p className="mb-4">{character.description}</p>
+          )}
 
-          <Tabs defaultValue={currentTab} onValueChange={handleChangeTab}>
-            <TabsList className="grid w-full grid-cols-4">
+          <Tabs
+            style={{ height: maxHeightScroll }}
+            className="pb-14"
+            defaultValue={currentTab}
+            onValueChange={handleChangeTab}
+          >
+            <TabsList
+              ref={tabListRef}
+              className="grid h-[2.5rem] w-full grid-cols-4"
+            >
               <TabsTrigger value="comics">Comics</TabsTrigger>
               <TabsTrigger value="series">Series</TabsTrigger>
               <TabsTrigger value="stories">Stories</TabsTrigger>
               <TabsTrigger value="events">Events</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="comics">
+            <TabsContent value="comics" className="m-0 h-full">
               <ScrollTabContent
                 data={result?.data}
                 totalPerPage={TOTAL_PER_PAGE}
               />
             </TabsContent>
 
-            <TabsContent value="series">
+            <TabsContent value="series" className="m-0 h-full">
               <ScrollTabContent
                 data={result?.data}
                 totalPerPage={TOTAL_PER_PAGE}
               />
             </TabsContent>
 
-            <TabsContent value="stories">
+            <TabsContent value="stories" className="m-0 h-full">
               <ScrollTabContent
                 data={result?.data}
                 totalPerPage={TOTAL_PER_PAGE}
               />
             </TabsContent>
 
-            <TabsContent value="events">
+            <TabsContent value="events" className="m-0 h-full">
               <ScrollTabContent
                 data={result?.data}
                 totalPerPage={TOTAL_PER_PAGE}
