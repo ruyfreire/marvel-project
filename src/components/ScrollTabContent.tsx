@@ -98,7 +98,7 @@ export function ScrollTabContent({ data, totalPerPage }: TabContentProps) {
                 <a
                   target="_blank"
                   href={externalLink}
-                  className="text-base underline"
+                  className="flex-1 text-base underline"
                 >
                   {item.title}
                 </a>
